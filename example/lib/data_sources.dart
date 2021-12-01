@@ -1,6 +1,6 @@
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:data_table_2/data_table_2.dart';
 
 // Copyright 2019 The Flutter team. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
@@ -148,28 +148,26 @@ class DessertDataSource extends DataTableSource {
                 notifyListeners();
               }
             },
-      onTap: hasRowTaps
-          ? () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                duration: Duration(seconds: 1),
-                content: Text('Tapped on ${dessert.name}'),
-              ))
-          : null,
-      onDoubleTap: hasRowTaps
-          ? () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                duration: Duration(seconds: 1),
-                backgroundColor: Theme.of(context).focusColor,
-                content: Text('Double Tapped on ${dessert.name}'),
-              ))
-          : null,
-      onSecondaryTap: hasRowTaps
-          ? () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                duration: Duration(seconds: 1),
-                backgroundColor: Theme.of(context).errorColor,
-                content: Text('Right clicked on ${dessert.name}'),
-              ))
-          : null,
+      // onTap: () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      //   duration: Duration(seconds: 1),
+      //   content: Text('Tapped on ${dessert.name}'),
+      // )),
+      // onDoubleTap: hasRowTaps
+      //     ? () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      //           duration: Duration(seconds: 1),
+      //           backgroundColor: Theme.of(context).focusColor,
+      //           content: Text('Double Tapped on ${dessert.name}'),
+      //         ))
+      //     : null,
+      // onSecondaryTap: hasRowTaps
+      //     ? () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      //           duration: Duration(seconds: 1),
+      //           backgroundColor: Theme.of(context).errorColor,
+      //           content: Text('Right clicked on ${dessert.name}'),
+      //         ))
+      //     : null,
       cells: [
-        DataCell(Text(dessert.name)),
+        DataCell(Text(dessert.name), onTapDown: (TapDownDetails? v) {}),
         DataCell(Text('${dessert.calories}')),
         DataCell(Text(dessert.fat.toStringAsFixed(1))),
         DataCell(Text('${dessert.carbs}')),
@@ -276,10 +274,10 @@ class DessertDataSourceAsync extends AsyncDataTableSource {
           return DataRow(
             key: ValueKey<int>(dessert.id),
             selected: dessert.selected,
-            onSelectChanged: (value) {
-              if (value != null)
-                setRowSelection(ValueKey<int>(dessert.id), value);
-            },
+            // onSelectChanged: (value) {
+            //   if (value != null)
+            //     setRowSelection(ValueKey<int>(dessert.id), value);
+            // },
             cells: [
               DataCell(Text(dessert.name)),
               DataCell(Text('${dessert.calories}')),
