@@ -22,14 +22,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f7be2c34-a536-4016-8cd1-4740e163791a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_table_2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/data_table_2.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/data_sources.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/data_sources.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/data_table_2.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/data_table_2.dart" afterDir="false" />
-    </list>
+    <list default="true" id="f7be2c34-a536-4016-8cd1-4740e163791a" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
