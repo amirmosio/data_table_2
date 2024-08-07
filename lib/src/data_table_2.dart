@@ -8,8 +8,6 @@ import 'dart:math' as math;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 
 /// Relative size of a column determines the share of total table width allocated
 /// to each individual column. When determining column widths ratios between S, M and L
@@ -52,7 +50,7 @@ class DataRow2 extends DataRow {
       {LocalKey? key,
       bool selected = false,
       ValueChanged<bool?>? onSelectChanged,
-      MaterialStateProperty<Color?>? color,
+      WidgetStateProperty<Color?>? color,
       required List<DataCell> cells,
       this.onTap,
       this.onDoubleTap,
@@ -70,7 +68,7 @@ class DataRow2 extends DataRow {
       {int? index,
       bool selected = false,
       ValueChanged<bool?>? onSelectChanged,
-      MaterialStateProperty<Color?>? color,
+      WidgetStateProperty<Color?>? color,
       required List<DataCell> cells,
       this.onTap,
       this.onDoubleTap,
@@ -114,10 +112,10 @@ class DataTable2 extends DataTable {
     bool sortAscending = true,
     ValueSetter<bool?>? onSelectAll,
     Decoration? decoration,
-    MaterialStateProperty<Color?>? dataRowColor,
+    WidgetStateProperty<Color?>? dataRowColor,
     double? dataRowHeight,
     TextStyle? dataTextStyle,
-    MaterialStateProperty<Color?>? headingRowColor,
+    WidgetStateProperty<Color?>? headingRowColor,
     double? headingRowHeight,
     TextStyle? headingTextStyle,
     double? horizontalMargin,
@@ -229,7 +227,7 @@ class DataTable2 extends DataTable {
     required bool? checked,
     required VoidCallback? onRowTap,
     required ValueChanged<bool?>? onCheckboxChanged,
-    required MaterialStateProperty<Color?>? overlayColor,
+    required WidgetStateProperty<Color?>? overlayColor,
     required bool tristate,
   }) {
     final ThemeData themeData = Theme.of(context);
@@ -276,7 +274,7 @@ class DataTable2 extends DataTable {
     required VoidCallback? onSort,
     required bool sorted,
     required bool ascending,
-    required MaterialStateProperty<Color?>? overlayColor,
+    required WidgetStateProperty<Color?>? overlayColor,
   }) {
     final ThemeData themeData = Theme.of(context);
     label = Row(
@@ -296,7 +294,7 @@ class DataTable2 extends DataTable {
 
     final TextStyle effectiveHeadingTextStyle = headingTextStyle ??
         themeData.dataTableTheme.headingTextStyle ??
-        themeData.textTheme.subtitle2!;
+        themeData.textTheme.titleSmall!;
     final double effectiveHeadingRowHeight = headingRowHeight ??
         themeData.dataTableTheme.headingRowHeight ??
         _headingRowHeight;
@@ -345,7 +343,7 @@ class DataTable2 extends DataTable {
     required GestureTapCallback? onRowSecondaryTap,
     required GestureTapDownCallback? onRowSecondaryTapDown,
     required VoidCallback? onSelectChanged,
-    required MaterialStateProperty<Color?>? overlayColor,
+    required WidgetStateProperty<Color?>? overlayColor,
   }) {
     final ThemeData themeData = Theme.of(context);
     if (showEditIcon) {
@@ -359,7 +357,7 @@ class DataTable2 extends DataTable {
 
     final TextStyle effectiveDataTextStyle = dataTextStyle ??
         themeData.dataTableTheme.dataTextStyle ??
-        themeData.textTheme.bodyText2!;
+        themeData.textTheme.bodyMedium!;
     final double effectiveDataRowHeight = dataRowHeight ??
         themeData.dataTableTheme.dataRowHeight ??
         kMinInteractiveDimension;
@@ -420,14 +418,14 @@ class DataTable2 extends DataTable {
     assert(debugCheckHasMaterial(context));
 
     final ThemeData theme = Theme.of(context);
-    final MaterialStateProperty<Color?>? effectiveHeadingRowColor =
+    final WidgetStateProperty<Color?>? effectiveHeadingRowColor =
         headingRowColor ?? theme.dataTableTheme.headingRowColor;
-    final MaterialStateProperty<Color?>? effectiveDataRowColor =
+    final WidgetStateProperty<Color?>? effectiveDataRowColor =
         dataRowColor ?? theme.dataTableTheme.dataRowColor;
-    final MaterialStateProperty<Color?> defaultRowColor =
-        MaterialStateProperty.resolveWith(
-      (Set<MaterialState> states) {
-        if (states.contains(MaterialState.selected))
+    final WidgetStateProperty<Color?> defaultRowColor =
+        WidgetStateProperty.resolveWith(
+      (Set<WidgetState> states) {
+        if (states.contains(WidgetState.selected))
           return theme.colorScheme.primary.withOpacity(0.08);
         return null;
       },
@@ -466,7 +464,7 @@ class DataTable2 extends DataTable {
                     _dividerThickness,
               ))
             : null,
-        color: effectiveHeadingRowColor?.resolve(<MaterialState>{}),
+        color: effectiveHeadingRowColor?.resolve(<WidgetState>{}),
       ),
       children: List<Widget>.filled(tableColumns.length, const _NullWidget()),
     );
@@ -477,9 +475,9 @@ class DataTable2 extends DataTable {
         final bool isSelected = rows[index].selected;
         final bool isDisabled =
             anyRowSelectable && rows[index].onSelectChanged == null;
-        final Set<MaterialState> states = <MaterialState>{
-          if (isSelected) MaterialState.selected,
-          if (isDisabled) MaterialState.disabled,
+        final Set<WidgetState> states = <WidgetState>{
+          if (isSelected) WidgetState.selected,
+          if (isDisabled) WidgetState.disabled,
         };
         final Color? resolvedDataRowColor =
             (rows[index].color ?? effectiveDataRowColor)?.resolve(states);
@@ -518,7 +516,7 @@ class DataTable2 extends DataTable {
             Checkbox.width +
             effectiveHorizontalMargin / 2.0;
         tableColumns[0] = FixedColumnWidth(checkBoxWidth);
-        headingRow.children![0] = _buildCheckbox(
+        headingRow.children[0] = _buildCheckbox(
           context: context,
           checked: someChecked ? null : allChecked,
           onRowTap: null,
@@ -529,7 +527,7 @@ class DataTable2 extends DataTable {
         );
         rowIndex = 0;
         for (final DataRow row in rows) {
-          tableRows[rowIndex].children![0] = _buildCheckbox(
+          tableRows[rowIndex].children[0] = _buildCheckbox(
             context: context,
             checked: row.selected,
             onRowTap: () => row.onSelectChanged != null
@@ -631,7 +629,7 @@ class DataTable2 extends DataTable {
         tableColumns[displayColumnIndex] =
             FixedColumnWidth(widths[dataColumnIndex]);
 
-        headingRow.children![displayColumnIndex] = _buildHeadingCell(
+        headingRow.children[displayColumnIndex] = _buildHeadingCell(
           context: context,
           padding: padding,
           label: column.label,
@@ -649,7 +647,7 @@ class DataTable2 extends DataTable {
         rowIndex = 0;
         for (final DataRow row in rows) {
           final DataCell cell = row.cells[dataColumnIndex];
-          tableRows[rowIndex].children![displayColumnIndex] = _buildDataCell(
+          tableRows[rowIndex].children[displayColumnIndex] = _buildDataCell(
             context: context,
             padding: padding,
             label: cell.child,

@@ -15,8 +15,7 @@ import 'test_utils.dart';
 
 void main() {
   final TestWidgetsFlutterBinding binding =
-      TestWidgetsFlutterBinding.ensureInitialized()
-          as TestWidgetsFlutterBinding;
+      TestWidgetsFlutterBinding.ensureInitialized();
 
   testWidgets('PaginatedDataTable2 paging', (WidgetTester tester) async {
     final TestDataSource source = TestDataSource();
@@ -285,7 +284,7 @@ void main() {
     await tester.pumpWidget(MaterialApp(
       home: MediaQuery(
         data: const MediaQueryData(
-          textScaleFactor: 20.0,
+          textScaler: TextScaler.linear(20.0),
         ),
         child: PaginatedDataTable2(
           header: const Text('HEADER'),

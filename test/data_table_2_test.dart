@@ -13,7 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vector_math/vector_math_64.dart' show Matrix3;
 
-import 'mock_canvas.dart';
+import 'mock_canvas.dart' as mCanvas;
 import 'test_utils.dart';
 
 void main() {
@@ -1495,9 +1495,9 @@ void main() {
           rows: <DataRow2>[
             DataRow2(
               selected: selected,
-              color: MaterialStateProperty.resolveWith<Color>(
-                (Set<MaterialState> states) {
-                  if (states.contains(MaterialState.selected))
+              color: WidgetStateProperty.resolveWith<Color>(
+                (Set<WidgetState> states) {
+                  if (states.contains(WidgetState.selected))
                     return selectedColor;
                   return defaultColor;
                 },
@@ -1549,9 +1549,9 @@ void main() {
               onSelectChanged: (bool? value) {},
             ),
             DataRow2(
-              color: MaterialStateProperty.resolveWith<Color>(
-                (Set<MaterialState> states) {
-                  if (states.contains(MaterialState.disabled))
+              color: WidgetStateProperty.resolveWith<Color>(
+                (Set<WidgetState> states) {
+                  if (states.contains(WidgetState.disabled))
                     return disabledColor;
                   return defaultColor;
                 },
@@ -1593,9 +1593,9 @@ void main() {
         ),
       ], rows: <DataRow2>[
         DataRow2(
-          color: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.pressed)) return pressedColor;
+          color: WidgetStateProperty.resolveWith<Color>(
+            (Set<WidgetState> states) {
+              if (states.contains(WidgetState.pressed)) return pressedColor;
               return Colors.transparent;
             },
           ),
@@ -1616,8 +1616,8 @@ void main() {
     await tester
         .pump(const Duration(milliseconds: 200)); // splash is well underway
     final RenderBox box =
-        Material.of(tester.element(find.byType(InkWell)))! as RenderBox;
-    expect(box, paints..circle(x: 68.0, y: 24.0, color: pressedColor));
+        Material.of(tester.element(find.byType(InkWell))) as RenderBox;
+    expect(box, mCanvas.paints..circle(x: 68.0, y: 24.0, color: pressedColor));
     await gesture.up();
   });
 
@@ -1680,7 +1680,7 @@ void main() {
 
     expect(
       t,
-      paints
+      mCanvas.paints
         ..rect(
           //rect: const Rect.fromLTRB(0.0, 0.0, width, height),
           color: backgroundColor,
@@ -1688,7 +1688,7 @@ void main() {
     );
     expect(
       t,
-      paints
+      mCanvas.paints
         ..path(color: borderColor)
         ..path(color: borderColor)
         ..path(color: borderColor)

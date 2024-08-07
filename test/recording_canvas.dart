@@ -2,9 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/src/rendering/layer.dart';
 
 /// An [Invocation] and the [stack] trace that led to it.
 ///
@@ -196,8 +194,7 @@ class TestRecordingPaintingContext extends ClipContext
 
 class _MethodCall implements Invocation {
   _MethodCall(this._name,
-      [this._arguments = const <dynamic>[],
-      this._typeArguments = const <Type>[]]);
+      [this._arguments = const <dynamic>[]]);
   final Symbol _name;
   final List<dynamic> _arguments;
   final List<Type> _typeArguments;
